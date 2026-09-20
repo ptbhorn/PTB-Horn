@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600" role="img" aria-labelledby="title desc">
+  <title id="title">PTN Horn</title>
+  <desc id="desc">PTN Horn wordmark set in the supplied Abduction2002 font with a compact horn-inspired sound mark.</desc>
+  <style>
+    @font-face {
+      font-family: 'Abduction2002';
+      src: url('fonts/abduction2002.ttf') format('truetype');
+    }
+    .ink { fill: #f1ede3; }
+    .line { fill: none; stroke: #f1ede3; stroke-linecap: round; }
+    .name { font-family: 'Abduction2002', sans-serif; letter-spacing: 10px; }
+    .sub { font-family: 'Abduction2002', sans-serif; letter-spacing: 19px; }
+  </style>
+  <!-- Transparent background: designed to sit on the site's dark field. -->
+  <g transform="translate(105 114)">
+    <!-- Minimal horn bell, opening towards the wordmark. -->
+    <path class="line" stroke-width="28" d="M42 192H166L294 82V302L166 192" />
+    <path class="line" stroke-width="22" d="M342 126C398 161 398 223 342 258" />
+    <path class="line" stroke-width="16" d="M405 76C495 142 495 242 405 308" />
+  </g>
+  <g class="ink" text-anchor="start">
+    <text class="name" x="575" y="304" font-size="204">PTN</text>
+    <text class="sub" x="584" y="458" font-size="104">HORN</text>
+  </g>
+</svg>

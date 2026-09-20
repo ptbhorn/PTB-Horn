@@ -1,25 +1,149 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PTB Horn</title>
-<style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    background: #000;
-  }
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "SFMono-Regular", Menlo, Consolas, "Courier New", monospace;
-    color: #fff;
-    font-size: clamp(3rem, 18vw, 12rem);
-    letter-spacing: 0.1em;
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#161514">
+  <title>PTB Horn</title>
+  <style>
+    @font-face {
+      font-family: "VCR OSD Mono";
+      src: url("assets/VCR_OSD_MONO_1.001.ttf") format("truetype");
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Grishenko NBP";
+      src: url("assets/GrishenkoNbpRegular-eqPn.ttf") format("truetype");
+      font-display: swap;
+    }
+
+    :root { color: #f1ede3; background: #161514; font-family: "VCR OSD Mono", monospace; }
+    * { box-sizing: border-box; }
+    body { max-width: 860px; min-height: 100vh; margin: 0 auto; padding: 36px 24px 64px; background: #161514; color: #f1ede3; font-size: 16px; line-height: 1.45; }
+    a, button { color: #f1ede3; }
+    header { display: flex; flex-direction: column; align-items: center; gap: 18px; padding-bottom: 20px; border-bottom: 2px solid #f1ede3; }
+    .brand { color: #f1ede3; font-family: "Grishenko NBP", monospace; font-size: clamp(3rem, 9vw, 5.5rem); line-height: .85; text-decoration: none; }
+    .tagline { margin: -4px 0 0; font-size: .9rem; text-align: center; }
+    nav { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
+    nav a { text-decoration: none; }
+    nav a:hover, nav a:focus { text-decoration: underline; }
+    .prompt { margin: 42px 0 38px; font-size: clamp(1.45rem, 4vw, 2.2rem); line-height: 1.25; }
+    .prompt::before { content: "> "; }
+    .cursor { display: inline-block; width: .55em; height: 1.05em; vertical-align: -.18em; background: #f1ede3; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    section { margin-top: 42px; }
+    h2 { margin: 0 0 16px; font-size: 1rem; font-weight: normal; }
+    h2::before { content: "[ "; } h2::after { content: " ]"; }
+    .count { float: right; font-size: .85rem; }
+    .post-list, .audio-list { border-top: 1px solid #f1ede3; }
+    .post, .audio-item { padding: 18px 0; border-bottom: 1px solid #f1ede3; }
+    .post-meta { margin-bottom: 8px; font-size: .8rem; }
+    .post h3 { margin: 0 0 8px; font-size: 1rem; font-weight: normal; }
+    .post h3::before { content: "$ cat "; }
+    .post p { margin: 0; white-space: pre-wrap; }
+    .empty { padding: 18px 0; border-bottom: 1px solid #f1ede3; }
+    .empty::before { content: "$ "; }
+    .delete { display: block; margin-top: 12px; padding: 0; border: 0; background: transparent; text-decoration: underline; font: inherit; font-size: .78rem; cursor: pointer; }
+    .audio-item strong { display: block; margin-bottom: 10px; font-weight: normal; }
+    .audio-item strong::before { content: "> "; }
+    audio { width: min(100%, 450px); filter: grayscale(1) contrast(1.25) invert(1); }
+    .add-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    form { display: grid; gap: 10px; padding-top: 15px; border-top: 1px solid #f1ede3; }
+    label { font-size: .84rem; }
+    input, textarea { width: 100%; border: 1px solid #f1ede3; border-radius: 0; padding: 9px; color: #f1ede3; background: #161514; font: inherit; font-size: .9rem; }
+    textarea { min-height: 125px; resize: vertical; }
+    input:focus, textarea:focus { outline: 2px solid #f1ede3; outline-offset: 2px; }
+    input[type="file"] { padding: 7px; }
+    button.primary { justify-self: start; padding: 8px 10px; border: 1px solid #f1ede3; border-radius: 0; background: #f1ede3; color: #161514; font: inherit; cursor: pointer; }
+    button.primary:hover, button.primary:focus { background: #161514; color: #f1ede3; }
+    .note { margin: 4px 0 0; font-size: .75rem; }
+    footer { margin-top: 56px; padding-top: 16px; border-top: 2px solid #f1ede3; font-size: .8rem; }
+    @media (max-width: 640px) { body { padding: 22px 18px 44px; } .prompt { margin: 32px 0; } .add-grid { grid-template-columns: 1fr; gap: 38px; } }
+    @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+  </style>
 </head>
-<body>PTB Horn</body>
+<body>
+  <header>
+    <a class="brand" href="#top">P.T.B. Horn</a>
+    <p class="tagline">AUDIO CREATIONS HAND-ROLLED WITH LOVE BY PHILLIP HORN</p>
+  </header>
+
+  <main id="top">
+    <p class="prompt">PTB HORN / PROJECTS + AUDIO <span class="cursor" aria-hidden="true"></span></p>
+
+    <section id="notes" aria-labelledby="notes-title">
+      <h2 id="notes-title">PROJECTS <span class="count" id="post-count">0 POSTS</span></h2>
+      <div class="post-list" id="post-list"></div>
+    </section>
+
+    <section id="audio" aria-labelledby="audio-title">
+      <h2 id="audio-title">PROJECT FILES <span class="count" id="audio-count">0 FILES</span></h2>
+      <div class="audio-list" id="audio-list"></div>
+      <p class="empty" id="audio-empty">NO AUDIO FILES LOADED</p>
+    </section>
+
+  </main>
+
+  <footer>PTB HORN // END OF LINE</footer>
+
+  <script>
+    const postList = document.querySelector('#post-list');
+    const postCount = document.querySelector('#post-count');
+    const audioList = document.querySelector('#audio-list');
+    const audioCount = document.querySelector('#audio-count');
+    const audioEmpty = document.querySelector('#audio-empty');
+    const savedPosts = JSON.parse(localStorage.getItem('ptb-horn-posts') || '[]');
+    const posts = Array.isArray(savedPosts) ? savedPosts : [];
+    const tracks = [];
+
+    function dateLabel(value) {
+      return new Intl.DateTimeFormat('en', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(value));
+    }
+
+    function renderPosts() {
+      postList.replaceChildren();
+      postCount.textContent = `${posts.length} ${posts.length === 1 ? 'POST' : 'POSTS'}`;
+      if (!posts.length) {
+        const empty = document.createElement('p');
+        empty.className = 'empty';
+        empty.textContent = 'NO NOTES FOUND';
+        postList.append(empty);
+        return;
+      }
+      posts.forEach((post, index) => {
+        const article = document.createElement('article');
+        const meta = document.createElement('div');
+        const title = document.createElement('h3');
+        const body = document.createElement('p');
+        article.className = 'post';
+        meta.className = 'post-meta';
+        meta.textContent = `PROJECT // ${dateLabel(post.createdAt)}`;
+        title.textContent = post.title;
+        body.textContent = post.body;
+        article.append(meta, title, body);
+        postList.append(article);
+      });
+    }
+
+    function renderTracks() {
+      audioList.replaceChildren();
+      audioCount.textContent = `${tracks.length} ${tracks.length === 1 ? 'FILE' : 'FILES'}`;
+      audioEmpty.hidden = tracks.length > 0;
+      tracks.forEach((track, index) => {
+        const item = document.createElement('div');
+        const title = document.createElement('strong');
+        const player = document.createElement('audio');
+        item.className = 'audio-item';
+        title.textContent = track.title;
+        player.controls = true;
+        player.src = track.url;
+        item.append(title, player);
+        audioList.append(item);
+      });
+    }
+
+    renderPosts();
+    renderTracks();
+  </script>
+</body>
 </html>
