@@ -13,8 +13,10 @@
     }
     @font-face {
       font-family: "Grishenko NBP";
-      src: url("assets/GrishenkoNbpRegular-eqPn.ttf") format("truetype");
-      font-display: swap;
+      src: url("assets/GrishenkoNbpRegular-eqPn.ttf?v=2") format("truetype");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
     }
 
     :root { color: #f1ede3; background: #161514; font-family: "VCR OSD Mono", monospace; }
@@ -22,7 +24,7 @@
     body { max-width: 860px; min-height: 100vh; margin: 0 auto; padding: 36px 24px 64px; background: #161514; color: #f1ede3; font-size: 16px; line-height: 1.45; }
     a, button { color: #f1ede3; }
     header { display: flex; flex-direction: column; align-items: center; gap: 18px; padding-bottom: 20px; border-bottom: 2px solid #f1ede3; }
-    .brand { color: #f1ede3; font-family: "Grishenko NBP", monospace; font-size: clamp(3rem, 9vw, 5.5rem); line-height: .85; text-decoration: none; }
+    .brand { color: #f1ede3; font-family: "Grishenko NBP", monospace !important; font-size: clamp(3rem, 9vw, 5.5rem); font-style: normal; font-weight: 400; font-synthesis: none; line-height: .85; text-decoration: none; }
     .tagline { margin: -4px 0 0; font-size: .9rem; text-align: center; }
     nav { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
     nav a { text-decoration: none; }
